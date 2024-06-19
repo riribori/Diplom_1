@@ -14,14 +14,15 @@ public class BunTest {
     @Mock
     private Bun mockBun;
 
+
     @Test
-    public void testBinName () {
+    public void testBunName () {
         Mockito.when(mockBun.getName()).thenReturn("Test");
         Assert.assertEquals("Test", mockBun.getName());
     }
 
     @Test
-    public void testBinPrice () {
+    public void testBunPrice () {
         Mockito.when(mockBun.getPrice()).thenReturn(1.11f);
         Assert.assertEquals(1.11f, mockBun.getPrice(),0);
     }
