@@ -1,35 +1,30 @@
 package test;
-
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import praktikum.Ingredient;
+import praktikum.IngredientType;
 
 public class IngredientTest {
 
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-    }
+    String name = "Tomato";
+    float price = 33.33f;
+    IngredientType ingredientType = IngredientType.SAUCE;
+    Ingredient ingredient = new Ingredient( ingredientType, name,  price);
 
-    @Mock
-    private Ingredient mockIngredient;
 
     @Test
     public void testIngredientName () {
-        Mockito.when(mockIngredient.getName()).thenReturn("Test");
-        Assert.assertEquals("Test", mockIngredient.getName());
+        Assert.assertEquals(name, ingredient.getName());
     }
 
     @Test
     public void testIngredientPrice () {
-        Mockito.when(mockIngredient.getPrice()).thenReturn(1.11f);
-        Assert.assertEquals(1.11f, mockIngredient.getPrice(),0);
+        Assert.assertEquals(price, ingredient.getPrice(),0);
     }
 
+    @Test
+    public void testIngredientType () {
+        Assert.assertEquals(ingredientType, ingredient.getType());
+    }
 
 }

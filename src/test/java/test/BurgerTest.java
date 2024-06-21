@@ -1,13 +1,23 @@
 package test;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import praktikum.Bun;
 import praktikum.Burger;
 import praktikum.Ingredient;
 import praktikum.IngredientType;
 
 import static org.junit.Assert.*;
+@RunWith(MockitoJUnitRunner.class)
 public class BurgerTest {
+
+    @Mock
+    private Bun mockBun;
+    @Mock
+    private Ingredient mockIngredients;
 
     @Test
     public  void testSetBun () {
@@ -56,26 +66,37 @@ public class BurgerTest {
     @Test
     public void testGetPrice (){
         Burger burger = new Burger ();
-        Ingredient ingredient1 = new Ingredient(IngredientType.SAUCE, "Tomato Sauce", 2.5f);
-        Ingredient ingredient2 = new Ingredient(IngredientType.FILLING, "Mazik", 6.5f);
-        burger.addIngredient(ingredient1);
-        burger.addIngredient(ingredient2);
-        Bun bun = new Bun("testy bun",22.3f); //создаем булку
-        burger.setBuns(bun);
+        float ingredientPrice = 1.11f;
+        Mockito.when(mockIngredients.getPrice()).thenReturn(ingredientPrice);
+        burger.addIngredient(mockIngredients);
+        burger.addIngredient(mockIngredients);
+        float bunPrice = 1.11f;
+        Mockito.when(mockBun.getPrice()).thenReturn(bunPrice);
+        burger.setBuns(mockBun);
         burger.getPrice();
-        float price = bun.getPrice() * 2 + ingredient1.getPrice() + ingredient2.getPrice();
+        float price = bunPrice * 2 + ingredientPrice + ingredientPrice;
         assertEquals("Цена различается", price, burger.getPrice(),0);
     }
 
     @Test
     public void testGetReceipt (){
         Burger burger = new Burger ();
-        Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "Tomato Sauce", 2.5f);
-        burger.addIngredient(ingredient);
-        Bun bun = new Bun("testy bun",22.3f); //создаем булку
-        burger.setBuns(bun);
-        assertTrue("Булка не добавилась", burger.getReceipt().contains("testy bun"));
-        assertTrue("Ингредиент не добавился", burger.getReceipt().contains("Tomato Sauce"));
+        String ingredientName = "Tomato Sauce";
+        String bunName = "testy bun";
+        float ingredientPrice = 1.11f;
+        float bunPrice = 1.11f;
+        IngredientType ingredientType = IngredientType.SAUCE;
+        Mockito.when(mockIngredients.getPrice()).thenReturn(ingredientPrice);
+        Mockito.when(mockBun.getPrice()).thenReturn(bunPrice);
+        Mockito.when(mockIngredients.getName()).thenReturn(ingredientName);
+        Mockito.when(mockBun.getName()).thenReturn(bunName);
+        Mockito.when(mockIngredients.getType()).thenReturn(ingredientType);
+      //  Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "Tomato Sauce", 2.5f);
+        burger.addIngredient(mockIngredients);
+      //  Bun bun = new Bun("testy bun",22.3f); //создаем булку
+        burger.setBuns(mockBun);
+        assertTrue("Булка не добавилась", burger.getReceipt().contains(bunName));
+        assertTrue("Ингредиент не добавился", burger.getReceipt().contains(ingredientName));
         assertTrue("Цена не добавилась", burger.getReceipt().contains(String.format("%nPrice: %f%n", burger.getPrice())));
     }
 }

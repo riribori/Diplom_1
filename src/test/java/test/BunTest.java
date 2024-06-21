@@ -1,30 +1,22 @@
 package test;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import praktikum.Bun;
 
-@RunWith(MockitoJUnitRunner.class)
 
 public class BunTest {
 
-    @Mock
-    private Bun mockBun;
-
+    String name = "Spice Bun";
+    float price = 11.33f;
+    Bun bun = new Bun(name, price);
 
     @Test
     public void testBunName () {
-        Mockito.when(mockBun.getName()).thenReturn("Test");
-        Assert.assertEquals("Test", mockBun.getName());
+        Assert.assertEquals(name, bun.getName());
     }
-
     @Test
     public void testBunPrice () {
-        Mockito.when(mockBun.getPrice()).thenReturn(1.11f);
-        Assert.assertEquals(1.11f, mockBun.getPrice(),0);
+        Assert.assertEquals(price, bun.getPrice(),0);
     }
 
 }
