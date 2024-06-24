@@ -33,13 +33,10 @@ public class BurgerTest {
         Burger burger = new Burger ();
         Ingredient ingredient1 = new Ingredient(IngredientType.SAUCE, "Tomato Sauce", 2.5f);
         Ingredient ingredient2 = new Ingredient(IngredientType.FILLING, "Mazik", 6.5f);
-        // Добавляем ингредиент к рецепту
         burger.addIngredient(ingredient1);
         burger.addIngredient(ingredient2);
-        // Проверяем, что ингредиент был добавлен
-         assertTrue("Ингредиент 1 не добавился", burger.ingredients.contains(ingredient1)); // проверяем что список ингредиентов в бургере содержит созданный ингр-ент
+         assertTrue("Ингредиент 1 не добавился", burger.ingredients.contains(ingredient1));
          assertTrue("Ингредиент 2 не добавился", burger.ingredients.contains(ingredient2));
-       //  assertEquals(ingredient2, burger.ingredients.get(1)); - пример через ассерт иквлс
     }
 
     @Test
@@ -91,9 +88,7 @@ public class BurgerTest {
         Mockito.when(mockIngredients.getName()).thenReturn(ingredientName);
         Mockito.when(mockBun.getName()).thenReturn(bunName);
         Mockito.when(mockIngredients.getType()).thenReturn(ingredientType);
-      //  Ingredient ingredient = new Ingredient(IngredientType.SAUCE, "Tomato Sauce", 2.5f);
         burger.addIngredient(mockIngredients);
-      //  Bun bun = new Bun("testy bun",22.3f); //создаем булку
         burger.setBuns(mockBun);
         assertTrue("Булка не добавилась", burger.getReceipt().contains(bunName));
         assertTrue("Ингредиент не добавился", burger.getReceipt().contains(ingredientName));

@@ -5,8 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import praktikum.Bun;
-import praktikum.Ingredient;
-import praktikum.IngredientType;
+
 
 @RunWith(Parameterized.class)
 
@@ -46,6 +45,5 @@ public class BunParameterizedTest {
         Bun bun = new Bun(bunName, price);
         Assert.assertEquals("Цена булочки не получена", price, bun.getPrice(), 0);
     }
-
 
 }

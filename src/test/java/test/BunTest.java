@@ -3,7 +3,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import praktikum.Bun;
 
-
 public class BunTest {
 
     String name = "Spice Bun";
